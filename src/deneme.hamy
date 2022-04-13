@@ -1,0 +1,9 @@
+fn rungame(){
+    repeat 50{
+        /summon minecraft:chicken
+    }
+}
+
+fn main(){
+    rungame()
+}
