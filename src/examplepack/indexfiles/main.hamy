@@ -1,0 +1,7 @@
+fn load()
+    /tellraw @a {"text":"Hello, World!","color":"dark_green"}
+end
+
+fn tick()
+
+end

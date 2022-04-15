@@ -40,6 +40,7 @@ pub fn create(packversion:i32, location:String,packname:String){
     rename_pack(&location, &packname.to_string());
     generate_json(&location, "tick.json".to_string(), &packname,r#"{"values": "place_holder:tick"}"#.to_string());
     generate_json(&location, "load.json".to_string(), &packname,r#"{"values": "place_holder:load"}"#.to_string());
+    generate_info(&location, &packname);
 }
 
 //generatin pack.mcmeta
@@ -84,4 +85,17 @@ fn generate_json(path:&String,filename:String,name:&String,content:String){
     //Editing and generating the file
     res1["values"] = Value::Array(vec![Value::String(res1["values"].to_string().replace('"', "").replace("place_holder",&name))]);
     file.write_all(res1.to_string().replace(r"\","").as_bytes()).expect(format!("{}","Something went wrong.".red().bold()).as_str()); 
+}
+
+fn generate_info(path:&String,packname:&String){
+    let content = r#"
+    {
+        "functionfolder":"/data/place_holder/functions"
+    }
+    "#;
+    let mut file = File::create(path.to_owned()+r"\packinfo.json").expect("Something went wrong.");
+    let mut res1 = Value::from_str(&content).expect("Oops. Something went wrong.");
+    
+    res1["functionfolder"] = json!(res1["functionfolder"].to_string().replace('"',"").replace("place_holder",packname));
+    file.write_all(res1.to_string().as_bytes()).expect(format!("{}","Something went wrong.".red().bold()).as_str());
 }

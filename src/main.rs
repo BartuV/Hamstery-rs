@@ -25,7 +25,7 @@ fn main() {
         if args[1] == "help"{
             println!("\n{}    {}\n{} {}\n{}  {}","help:".bold().green(),"shows this text","compile:".bold().green(),"compiles to minecraft datapack","create:".bold().green(),"create a example datapack")
         }else if args[1] == "compile"{
-            let _location = get_input("Enter a pack location> ");
+            let _location = get_input("Enter the pack location> ");
             if is_valid_path(&_location){
                 lexpars::run(_location);
             }else{
